@@ -10331,3 +10331,36 @@ Stack trace:
 REQUEST_URI=/kms/index.php/user/84
 in /Applications/MAMP/htdocs/kms/protected/controllers/UserController.php (63)
 in /Applications/MAMP/htdocs/kms/index.php (13)
+2014/03/01 21:31:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "profile".' in /Applications/MAMP/htdocs/kms/yii/framework/web/CController.php:483
+Stack trace:
+#0 /Applications/MAMP/htdocs/kms/yii/framework/web/CController.php(270): CController->missingAction('profile')
+#1 /Applications/MAMP/htdocs/kms/yii/framework/web/CWebApplication.php(282): CController->run('profile')
+#2 /Applications/MAMP/htdocs/kms/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('site/profile')
+#3 /Applications/MAMP/htdocs/kms/yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /Applications/MAMP/htdocs/kms/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/kms/index.php/site/profile
+HTTP_REFERER=http://localhost:8888/kms/index.php/user/index
+---
+2014/03/01 21:33:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "profile".' in /Applications/MAMP/htdocs/kms/yii/framework/web/CController.php:483
+Stack trace:
+#0 /Applications/MAMP/htdocs/kms/yii/framework/web/CController.php(270): CController->missingAction('profile')
+#1 /Applications/MAMP/htdocs/kms/yii/framework/web/CWebApplication.php(282): CController->run('profile')
+#2 /Applications/MAMP/htdocs/kms/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('site/profile')
+#3 /Applications/MAMP/htdocs/kms/yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /Applications/MAMP/htdocs/kms/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/kms/index.php/site/profile
+HTTP_REFERER=http://localhost:8888/kms/index.php/tasks/index
+---
+2014/03/01 21:33:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "profile".' in /Applications/MAMP/htdocs/kms/yii/framework/web/CController.php:483
+Stack trace:
+#0 /Applications/MAMP/htdocs/kms/yii/framework/web/CController.php(270): CController->missingAction('profile')
+#1 /Applications/MAMP/htdocs/kms/yii/framework/web/CWebApplication.php(282): CController->run('profile')
+#2 /Applications/MAMP/htdocs/kms/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('site/profile')
+#3 /Applications/MAMP/htdocs/kms/yii/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /Applications/MAMP/htdocs/kms/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/kms/index.php/site/profile
+HTTP_REFERER=http://localhost:8888/kms/index.php/tasks/index
+---

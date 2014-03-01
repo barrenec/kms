@@ -10,6 +10,9 @@ return array(
 	'name'=>'Kita Management Software: KMS',
 	'defaultController'=>'user',
 
+	'theme'=>'bootstrap',
+
+
 	// preloading 'log' component
 	'preload'=>array('log', 'kint'),
 
@@ -17,6 +20,11 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'ext.bootstrap-theme.widgets.*',
+        'ext.bootstrap-theme.helpers.*',
+        'ext.bootstrap-theme.behaviors.*',
+
+
 	),
 
 	'modules'=>array(
@@ -27,6 +35,10 @@ return array(
 			'password'=>'admin',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
+
+			'generatorPaths'=>array(
+                'ext.bootstrap-theme.gii',
+            ),
 		),
 		
 	),
