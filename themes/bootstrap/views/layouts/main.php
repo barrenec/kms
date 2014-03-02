@@ -28,31 +28,26 @@
 	<div class="navbar">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="<?php echo $this->createAbsoluteUrl('//'); ?>"><?php echo CHtml::encode(Yii::app()->name); ?></a>
-				<?php $this->widget('zii.widgets.CMenu',array(
-					'items'=>array(
-						array('label'=>'Home', 'url'=>array('/site/index')),
-						array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-						array('label'=>'Contact', 'url'=>array('/site/contact')),
-						array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-					),
-					'htmlOptions'=>array(
-						'class'=>'nav',
-					),
-				)); ?>
-				<?php $this->widget('zii.widgets.CMenu',array(
-					'items'=>array(
-						array('label'=>Yii::app()->user->name, 'url'=>array('site/profile'), 'visible'=>!Yii::app()->user->isGuest),
-						array('label'=>'Logout', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest, 'htmlOptions'=>array('class'=>'btn'))
-					),
-					'htmlOptions'=>array(
-						'class'=>'nav pull-right',
-					),
-				)); ?>
+				<?php $this->widget('bootstrap.widgets.TbNavbar', array(
+    'type'=>'inverse', // null or 'inverse'
+    'brand'=>'KMS',
+    'brandUrl'=>'#',
+    'collapse'=>true, // requires bootstrap-responsive.css
+    'items'=>array(
+        array(
+            'class'=>'bootstrap.widgets.TbMenu',
+            'items'=>array(
+                array('label'=>'Persons', 'url'=>'user/index'),
+                array('label'=>'Tasks', 'url'=>'#'),
+                array('label'=>'Working Groups', 'url'=>'#'),
+            ),
+        ),
+    ),
+)); ?>
 			</div>
 		</div>
 	</div>
-	
+	<br><br>
 	<div class="container">
 	<?php if(isset($this->breadcrumbs)):?>
 		<?php $this->widget('BBreadcrumbs', array(
@@ -66,9 +61,8 @@
 	
 	<footer class="footer">
 		<div class="container">
-			<p>Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
+			<p>Copyright &copy; <?php echo date('Y'); ?> barrenec.<br/>
 			All Rights Reserved.<br/>
-			<?php echo Yii::powered(); ?></p>
 		</div>
 	</footer>
 	

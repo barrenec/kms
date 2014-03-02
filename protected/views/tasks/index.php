@@ -12,14 +12,10 @@ $this->menu=array(
 );
 ?>
 
-<h1>Tasks</h1>
 
-
-<?php //$this->widget('zii.widgets.CListView', array('dataProvider'=>$dataProvider,'itemView'=>'_view',)); ?>
-
-
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('bootstrap.widgets.TbGridView', array(
 	'id'=>'tasks-grid',
+    'type'=>'striped bordered condensed',
 	'dataProvider'=>$dataProvider,
 	'columns'=>array(
 
@@ -27,7 +23,7 @@ $this->menu=array(
             'header' => 'Author',
             'name' => 'author',
             'type' => 'html',
-            'value' => '$data->user->firstName.\' \'.$data->user->lastName',
+            'value' => 'CHtml::link($data->user->firstName.\' \'.$data->user->lastName, array("user/view", "id"=>$data->userId))',
         ),		
 
 		 array(
@@ -35,15 +31,10 @@ $this->menu=array(
             'name' => 'taksName',
             'type' => 'html',
             'value' => '$data->taskHeadline',
+            'value' => 'CHtml::link($data->taskHeadline, array("view", "id"=>$data->taksId))',
         ),
 
-		array(
-            'header' => 'Description',
-            'name' => 'taksDescription',
-            'type' => 'html',
-            'value' => '$data->taskDescription',
-        ),		 
-
+		
 		array(
             'header' => 'Date',
             'name' => 'date',
@@ -59,8 +50,9 @@ $this->menu=array(
         ),	
 
 		array(
-			'class'=>'CButtonColumn',
-		),
+            'class'=>'bootstrap.widgets.TbButtonColumn',
+            'htmlOptions'=>array('style'=>'width: 50px'),
+        ),
 	),
 )); ?>
 

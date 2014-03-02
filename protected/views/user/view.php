@@ -18,58 +18,147 @@ $this->menu=array(
 );
 ?>
 
-<h1>User: <?php echo $userName; ?></h1>
+<h1>Profile <?php echo $userName; ?></h1><br>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'userId',
-		'firstName',
-		'lastName',
-		'email',
-		'userPassword',
-		'memberTyp',
-		'associationMember',
-		'insertDate',
-		'adress',
-		'zip',
-		'telefon',
-		'handy',
-		'nationality',
-		'birthOfDate',
-	),
+<?php $this->widget('bootstrap.widgets.TbMenu', array(
+    'type'=>'pills', 
+    'stacked'=>false,
+    'items'=>array(
+        array('label'=>'General informations', 'url'=>'#generalInformations'),
+        array('label'=>'Stats', 'url'=>'#stats'),
+        array('label'=>'Tasks', 'url'=>'#tasks'),
+    ),
 )); ?>
 
+<a name="generalInformations"></a>
+<h3>General informations</h3><br>
+<?php 
 
-<br><br>
-<h1>Stats</h1>
+$this->widget('bootstrap.widgets.TbDetailView', array(
+    'data'=>$model,
+    'attributes'=>array(
+        array('name'=>'firstName', 'label'=>'First name'),
+        array('name'=>'lastName', 'label'=>'Last name'),
+        array('name'=>'email', 'label'=>'Email'),
+        array('name'=>'memberTyp', 'label'=>'Member typ'),
+        array('name'=>'associationMember', 'label'=>'Association member'),
+        array('name'=>'adress', 'label'=>'Adress'),
+        array('name'=>'zip', 'label'=>'Postal code'),
+        array('name'=>'telefon', 'label'=>'Telephone'),
+        array('name'=>'handy', 'label'=>'Mobil phone'),
+        array('name'=>'nationality', 'label'=>'Nationality'),
+        array('name'=>'birthOfDate', 'label'=>'Date of birth'),
+    ),
+));
 
-<b>Total worked time:</b> 
-<?php echo $stats['d'];?> Days
-<?php echo $stats['h'];?> Hours
-<?php echo $stats['m'];?> Minutes
+ ?>
 
-<br><br>
-<b>Worked time per Month:</b>
+
 <br>
-<?php foreach($statsPerMonth as $key=>$value): ?>
-	
-	<?php echo $key.': '.$value['d'].' Days'?>
-	<?php echo $value['h'].' Hours'?>
-	<?php echo $value['m'].' Minutes'?>
-	<br>
- <?php endforeach; ?>
+
+<a name="stats"></a>
+<h3>Stats</h3><br>
 
 
+<?php
+$this->widget('bootstrap.widgets.TbDetailView', array(
+	'type'=>'bordered',
+    'data'=>array('totalWorkedTime'=>$stats['d'].' Days '.$stats['h'].' Hours '.$stats['m'].' Minutes '
+    	),
+    'attributes'=>array(
+        array('name'=>'totalWorkedTime', 'label'=>'Total worked time'),
+    ),
+));
 
-<br><br>
+foreach($statsPerMonth as $key=>$value){
 
-<h1>Tasks</h1>
+	$theValue = $value['d'].' Days '.$value['h'].' Hours '.$value['m'].' Minutes ';
 
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$tasks,
-	'itemView'=>'/tasks/_view',
+	/*$this->widget('bootstrap.widgets.TbDetailView', array(
+	'type'=>'bordered',	
+    'data'=>array($key=>$theValue),
+    'attributes'=>array(
+        array('name'=>$key, 'label'=>$key),
+    	),
+	));*/
+
+	echo '<h4>'.$key.'</h4><em>'.$theValue.'</em><br>';
+
+	$barType = 'info';
+	$barPercent = '80';
+
+	if($value['h'] < 4 & $value['d'] == 0){
+		$barType = 'danger';	
+		$barPercent = '40';
+	}
+	elseif($value['h'] > 8 ||  $value['d'] >= 1){
+		$barType = 'success';	
+		$barPercent = '100';
+	}
+
+
+	$this->widget('bootstrap.widgets.TbProgress', array(
+    'type'=>$barType, // 'info', 'success' or 'danger'
+    'percent'=>$barPercent, // the progress
+    'striped'=>false,
+    'animated'=>false,
+));
+
+}
+
+
+?>
+
+
+<br>
+<a name="tasks"></a>
+<h3>Tasks</h3>
+<br>
+
+
+<?php $this->widget('bootstrap.widgets.TbGridView', array(
+    'id'=>'tasks-grid',
+    'type'=>'striped bordered condensed',
+    'dataProvider'=>$tasks,
+    'columns'=>array(
+
+         array(
+            'header' => 'Author',
+            'name' => 'author',
+            'type' => 'html',
+            'value' => 'CHtml::link($data->user->firstName.\' \'.$data->user->lastName, array("user/view", "id"=>$data->userId))',
+        ),      
+
+         array(
+            'header' => 'Name',
+            'name' => 'taksName',
+            'type' => 'html',
+            'value' => '$data->taskHeadline',
+            'value' => 'CHtml::link($data->taskHeadline, array("view", "id"=>$data->taksId))',
+        ),
+
+        
+        array(
+            'header' => 'Date',
+            'name' => 'date',
+            'type' => 'html',
+            'value' => '$data->taskDateFrom',
+        ),  
+
+        array(
+            'header' => 'Duration',
+            'name' => 'duration',
+            'type' => 'html',
+            'value' => '$data->taskDuration.\' \'.$data->taskDurationEntity',
+        ),  
+
+        array(
+            'class'=>'bootstrap.widgets.TbButtonColumn',
+            'htmlOptions'=>array('style'=>'width: 50px'),
+        ),
+    ),
 )); ?>
+
 
 
 

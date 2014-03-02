@@ -1,15 +1,12 @@
 <?php
 
-// uncomment the following to define a path alias
-// Yii::setPathOfAlias('local','path/to/local-folder');
 
-// This is the main Web application configuration. Any writable
-// CWebApplication properties can be configured here.
+Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
+
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Kita Management Software: KMS',
 	'defaultController'=>'user',
-
 	'theme'=>'bootstrap',
 
 
@@ -37,7 +34,7 @@ return array(
 			'ipFilters'=>array('127.0.0.1','::1'),
 
 			'generatorPaths'=>array(
-                'ext.bootstrap-theme.gii',
+                'bootstrap.gii',
             ),
 		),
 		
@@ -54,6 +51,10 @@ return array(
 			'kint' => array(
 			    'class' => 'ext.Kint.Kint',	
 			),
+
+			'bootstrap'=>array(
+            'class'=>'bootstrap.components.Bootstrap',
+        	),
 
 			// uncomment the following to enable URLs in path-format
 			'urlManager'=>array(

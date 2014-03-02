@@ -16,20 +16,20 @@ $this->menu=array(
 );
 ?>
 
-<h1>WorkingGroup:</h1>
 
-<div>
 <h3><?php echo $model->workingGroupName; ?></h3>
 <?php echo $model->workingGroupDescription; ?>
-</div>
 
 <br><br>
 
 <h1>Tasks</h1>
 
-<?php $this->widget('zii.widgets.CListView', array(
+<?php $this->widget('bootstrap.widgets.TbGridView', array(
 	'dataProvider'=>$tasks,
-	'itemView'=>'/tasks/_view',
+	'type'=>'striped bordered condensed',
+	'id'=>'tasks-grid',
+
+
 )); ?>
 
 

@@ -12,17 +12,30 @@ $this->menu=array(
 );
 ?>
 
-<h1>Working Groups</h1>
-
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('bootstrap.widgets.TbGridView', array(
 	'id'=>'working-groups-grid',
+	'type'=>'striped bordered condensed',
 	'dataProvider'=>$dataProvider,
 	'columns'=>array(
-		'workingGroupName::Name',
-		'workingGroupDescription::Description',
+
 		array(
-			'class'=>'CButtonColumn',
-		),
+            'header' => 'Name',
+            'name' => 'Name',
+            'type' => 'html',
+            'value' => 'CHtml::link($data->workingGroupName, array("view", "id"=>$data->id))',
+        ),	
+
+		array(
+            'header' => 'Description',
+            'name' => 'workingGroupDescription',
+            'type' => 'html',
+            'value' => '$data->workingGroupDescription',
+        ),		
+	
+		array(
+            'class'=>'bootstrap.widgets.TbButtonColumn',
+            'htmlOptions'=>array('style'=>'width: 50px'),
+        ),
 	),
 )); ?>
 

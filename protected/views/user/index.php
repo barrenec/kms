@@ -22,10 +22,9 @@ $this->searchFilters=array(
 
 ?>
 
-<h1>Users</h1>
-
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('bootstrap.widgets.TbGridView', array(
 	'id'=>'users-grid',
+	'type'=>'striped bordered condensed',
 	'dataProvider'=>$dataProvider,
 	'columns'=>array(
 
@@ -53,17 +52,17 @@ $this->searchFilters=array(
 
 
 		array(
-            'header' => 'Association Member',
+            'header' => 'Member typ',
             'name' => 'associationMember',
             'type' => 'html',
             'value' => '$data->associationMember',
         ),
 
-	
 
 		array(
-			'class'=>'CButtonColumn',
-		),
+            'class'=>'bootstrap.widgets.TbButtonColumn',
+            'htmlOptions'=>array('style'=>'width: 50px'),
+        ),
 	),
 )); ?>
 
