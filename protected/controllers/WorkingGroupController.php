@@ -7,6 +7,8 @@ class WorkingGroupController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
+	public $pageCaption = 'Working groups';
+	public $pageDescription = '';
 
 	/**
 	 * @return array action filters

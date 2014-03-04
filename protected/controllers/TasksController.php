@@ -7,6 +7,9 @@ class TasksController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
+	public $pageCaption = 'Tasks';
+	public $pageDescription = '';
+
 
 	/**
 	 * @return array action filters
@@ -29,7 +32,7 @@ class TasksController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
-				'users'=>array('*'),
+				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
@@ -51,6 +54,7 @@ class TasksController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$this->pageDescription = 'Details';
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));

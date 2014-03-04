@@ -3,6 +3,8 @@
 class UserController extends Controller
 {
 	public $layout='//layouts/column2';
+	public $pageCaption = 'People';
+	public $pageDescription = '';
 
 	/**
 	 * @return array action filters
@@ -101,9 +103,12 @@ class UserController extends Controller
 		
 				
 		$stats = $helper->formatWorkingTime($totalWorkingTime);		
+		$model = $this->loadModel($id);
+		$this->pageDescription = ' Profile '.$model->firstName.' '.$model->lastName;
+
 
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
 			'tasks'=>$tasks,
 			'stats'=>$stats,
 			'statsPerMonth'=>$statsPerMonth,

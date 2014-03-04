@@ -7,6 +7,10 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
+<script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.js"></script>
+<script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.ba-bbq.js"></script>
+<script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/bootstrap.js"></script>
+
 	<!-- Le styles -->
 	<link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/application.min.css" rel="stylesheet">
@@ -26,8 +30,6 @@
 
 <body>
 
-	
-
 	<div class="navbar">
 		<div class="navbar-inner">
 			<div class="container">
@@ -40,15 +42,18 @@
         array(
             'class'=>'bootstrap.widgets.TbMenu',
             'items'=>array(
-                array('label'=>'Persons', 'url'=>Yii::app()->request->scriptUrl.'/user/index', 'visible'=>!Yii::app()->user->isGuest, 'icon'=>'user white'),
+                array('label'=>'People', 'url'=>Yii::app()->request->scriptUrl.'/user/index', 'visible'=>!Yii::app()->user->isGuest, 'icon'=>'user white'),
                 array('label'=>'Tasks', 'url'=>Yii::app()->request->scriptUrl.'/tasks/index', 'visible'=>!Yii::app()->user->isGuest, 'icon'=>'list white'),
                 array('label'=>'Working Groups', 'url'=>Yii::app()->request->scriptUrl.'/workinggroup/index', 'visible'=>!Yii::app()->user->isGuest, 
                 	'icon'=>'th-large white',
+                	'items'=>array(
+                			array('label'=>'Working Groups', 'url'=>Yii::app()->request->scriptUrl.'/workinggroup/index', 'visible'=>!Yii::app()->user->isGuest,),
+                			array('label'=>'Working Group Members', 'url'=>Yii::app()->request->scriptUrl.'/workinggroupsmember/index', 'visible'=>!Yii::app()->user->isGuest,
+                	),
+                		),
                 	),
 
-                array('label'=>'Working Group Members', 'url'=>Yii::app()->request->scriptUrl.'/workinggroupsmember/index', 'visible'=>!Yii::app()->user->isGuest, 
-                	'icon'=>'th white',
-                	),
+                
 
             ),
         ),

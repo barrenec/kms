@@ -42,7 +42,7 @@ class Controller extends CController
 		return array(
 			
 			array('allow',  
-				'actions'=>array('login'),
+				'actions'=>array('login','captcha'),
 				'users'=>array('*'),
 			),
 			

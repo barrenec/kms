@@ -35,18 +35,25 @@ $this->breadcrumbs=array(
 		<div class="controls">
 			<?php echo $form->passwordField($model,'password'); ?>
 			<?php echo $form->error($model,'password'); ?>
-			<span class="help-block">
-				Hint: You may login with <tt>demo/demo</tt> or <tt>admin/admin</tt>.
-			</span>
 		</div>
 	</div>
 
-	<div class="<?php echo $form->fieldClass($model, 'rememberMe'); ?>">
+	<?php if(CCaptcha::checkRequirements()): ?>
+	<div class="<?php echo $form->fieldClass($model, 'verifyCode'); ?>">
+		<?php echo $form->labelEx($model,'verifyCode'); ?>
 		<div class="controls">
-			<?php echo $form->checkBox($model,'rememberMe'); ?>
-			<?php echo $form->error($model,'rememberMe'); ?>
+			<?php $this->widget('CCaptcha'); ?><br/>
+			<?php echo $form->textField($model,'verifyCode'); ?>
+			<?php echo $form->error($model,'verifyCode'); ?>
+			<p class="help-block">
+				Please enter the letters as they are shown in the image above.
+				<br/>Letters are not case-sensitive.
+			</p>
 		</div>
 	</div>
+	<?php endif; ?>
+
+
 
 	<div class="form-actions">
 		<?php echo BHtml::submitButton('Login'); ?>
