@@ -25,23 +25,45 @@
 </head>
 
 <body>
+
+	
+
 	<div class="navbar">
 		<div class="navbar-inner">
 			<div class="container">
 				<?php $this->widget('bootstrap.widgets.TbNavbar', array(
-    'type'=>'inverse', // null or 'inverse'
+    'type'=>'null', // null or 'inverse'
     'brand'=>'KMS',
-    'brandUrl'=>'#',
+    'brandUrl'=>Yii::app()->request->scriptUrl,
     'collapse'=>true, // requires bootstrap-responsive.css
     'items'=>array(
         array(
             'class'=>'bootstrap.widgets.TbMenu',
             'items'=>array(
-                array('label'=>'Persons', 'url'=>'user/index'),
-                array('label'=>'Tasks', 'url'=>'#'),
-                array('label'=>'Working Groups', 'url'=>'#'),
+                array('label'=>'Persons', 'url'=>Yii::app()->request->scriptUrl.'/user/index', 'visible'=>!Yii::app()->user->isGuest, 'icon'=>'user white'),
+                array('label'=>'Tasks', 'url'=>Yii::app()->request->scriptUrl.'/tasks/index', 'visible'=>!Yii::app()->user->isGuest, 'icon'=>'list white'),
+                array('label'=>'Working Groups', 'url'=>Yii::app()->request->scriptUrl.'/workinggroup/index', 'visible'=>!Yii::app()->user->isGuest, 
+                	'icon'=>'th-large white',
+                	),
+
+                array('label'=>'Working Group Members', 'url'=>Yii::app()->request->scriptUrl.'/workinggroupsmember/index', 'visible'=>!Yii::app()->user->isGuest, 
+                	'icon'=>'th white',
+                	),
+
             ),
         ),
+
+       array(
+            'class'=>'bootstrap.widgets.TbMenu',
+            'htmlOptions'=>array('class'=>'pull-right'),
+            'items'=>array(
+            	array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+				array('label'=>'Logout ( '.Yii::app()->user->name.' )', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest
+					, 'icon'=>'share white'),                
+            ),
+        ),
+
+
     ),
 )); ?>
 			</div>

@@ -20,6 +20,28 @@ $this->menu=array(
 
 <h1>Profile <?php echo $userName; ?></h1><br>
 
+<?php $this->widget('bootstrap.widgets.TbTabs', array(
+    'type'=>'tabs',
+    'placement'=>'below', // 'above', 'right', 'below' or 'left'
+    'tabs'=>array(
+        array('label'=>'Section 1', 'content'=>'<p>I\'m in Section 1.</p>', 'active'=>true),
+        array('label'=>'Section 2', 'content'=>'<p>Howdy, I\'m in Section 2.</p>'),
+        array('label'=>'Section 3', 'content'=>'<p>What up girl, this is Section 3.</p>'),
+    ),
+)); ?>
+
+
+<?php $this->widget('bootstrap.widgets.TbTabs', array(
+    'type'=>'tabs', 
+    'id'=>'Mytab',
+    'tabs'=>array(
+        array('label'=>'Home', 'content'=>'ddd', 'href'=>'#Mytab_tab_2', 'htmlOptions'=>array('data-toogle'=>'tab'), 'active'=>'true'),
+        array('label'=>'Profile', 'content'=>'jjjj', 'href'=>'#Mytab_tab_2', 'htmlOptions'=>array('data-toogle'=>'tab')),
+    ),
+)); ?>
+
+
+
 <?php $this->widget('bootstrap.widgets.TbMenu', array(
     'type'=>'pills', 
     'stacked'=>false,
