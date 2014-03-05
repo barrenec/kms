@@ -8,12 +8,26 @@
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'users-create-form',
-	'enableAjaxValidation'=>false,
+	'enableAjaxValidation'=>true,
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'memberTyp'); ?>
+		<?php echo $form->dropDownList($model,'memberTyp'
+		, array(''=>'Select Person typ',
+				'Parent'=>'Parent',
+				 'Child'=>'Child',
+				 'Supporter'=>'Supporter',
+				 'Parent waiting'=>'Parent waiting',
+				 'Child waiting'=>'Child waiting')
+			 ); ?>
+		<?php echo $form->error($model,'memberTyp'); ?>
+	</div>
+
 	
 	<div class="row">
 		<?php echo $form->labelEx($model,'memberTyp'); ?>

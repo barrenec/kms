@@ -4,46 +4,27 @@
 /* @var $form CActiveForm */
 ?>
 
-<div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'tasks-form',
-	'enableAjaxValidation'=>false,
+
+<?php /** @var BootActiveForm $form */
+$form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+    'id'=>'verticalForm',
+    'htmlOptions'=>array('class'=>'well'),
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
-	<?php echo $form->errorSummary($model); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'userId'); ?>
-		<?php  echo $form->dropDownList($model, 'userId' 
+<?php  echo $form->dropDownListRow($model, 'userId' 
 		, CHtml::listData($users, 'userId','UserFullName'));?>
-		<?php echo $form->error($model,'userId'); ?>
-	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'workingGroupId'); ?>
-		<?php  echo $form->dropDownList($model, 'workingGroupId' 
+<?php  echo $form->dropDownListRow($model, 'workingGroupId' 
 		, CHtml::listData($workingGroups, 'id','workingGroupName'));?>
-		<?php echo $form->error($model,'WorkingGroupId'); ?>
-	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'taskHeadline'); ?>
-		<?php echo $form->textField($model,'taskHeadline',array('size'=>60,'maxlength'=>350)); ?>
-		<?php echo $form->error($model,'taskHeadline'); ?>
-	</div>
+<?php echo $form->textFieldRow($model,'taskHeadline',array('class'=>'span6','maxlength'=>350)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'taskDescription'); ?>
-		<?php echo $form->textArea($model,'taskDescription',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'taskDescription'); ?>
-	</div>
-	
-	<div class="row">
-		<?php echo $form->labelEx($model,'taskDateFrom'); ?>
-		<?php 
+<?php echo $form->textAreaRow($model,'taskDescription',array('class'=>'span6')); ?>
+
+
+<?php echo $form->labelEx($model,'taskDateFrom'); ?>
+<?php 
 		$this->widget('zii.widgets.jui.CJuiDatePicker',array(
 			'attribute'=>'taskDateFrom',
 		    'name'=>'taskDateFrom',
@@ -57,12 +38,10 @@
 		    'htmlOptions'=>array(),
 		));
 		?>
-		<?php echo $form->error($model,'taskDateFrom'); ?>
-	</div>
-	
-	<div class="row">
-		<?php echo $form->labelEx($model,'taskDateTo'); ?>
-		<?php 
+
+<?php echo $form->labelEx($model,'taskDateTo'); ?>
+
+<?php 
 		$this->widget('zii.widgets.jui.CJuiDatePicker',array(
 			'attribute'=>'taskDateTo',
 		    'name'=>'taskDateTo',
@@ -76,33 +55,22 @@
 		    'htmlOptions'=>array(),
 		));
 		?>
-		<?php echo $form->error($model,'taskDateTo'); ?>
-	</div>
-	
-	
-	<div class="row">
-		<?php echo $form->labelEx($model,'taskDuration'); ?>
-		<?php echo $form->textField($model,'taskDuration'); ?>
-		<?php echo $form->error($model,'taskDuration'); ?>
-	</div>
-	
-	
-	<div class="row">
-		<?php echo $form->labelEx($model,'taskDurationEntity'); ?>
-		<?php echo $form->dropDownList($model,'taskDurationEntity'
+
+
+<?php echo $form->textFieldRow($model,'taskDuration', array('class'=>'span4')); ?>
+
+
+<?php echo $form->dropDownList($model,'taskDurationEntity'
 		, array(
 				'm'=>'minutes',
 				 'h'=>'hours',
 				 'd'=>'days'
+
 				 )
 			 ); ?>
-		<?php echo $form->error($model,'associationMember'); ?>
-	</div>
+<br><br>
+<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'label'=>'Create task')); ?>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
-
+ 
 <?php $this->endWidget(); ?>
 
-</div><!-- form -->
