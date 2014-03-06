@@ -16,21 +16,19 @@ $this->menu=array(
 );
 ?>
 
-
 <h3><?php echo $model->workingGroupName; ?></h3>
 <?php echo $model->workingGroupDescription; ?>
-
 <br><br>
 
-<h1>Tasks</h1>
-
-<?php $this->widget('bootstrap.widgets.TbGridView', array(
-	'dataProvider'=>$tasks,
-	'type'=>'striped bordered condensed',
-	'id'=>'tasks-grid',
-
-
+<?php $this->widget('bootstrap.widgets.TbTabs', array(
+    'type'=>'tabs', 
+    'id'=>'Mytab',
+    'tabs'=>array(
+        array('label'=>'Tasks', 'content'=>$this->renderPartial( '/tasks/_tasks', array( 'tasks'=>$tasks), true ),'active'=>'true'),
+    ),
 )); ?>
+
+
 
 
 

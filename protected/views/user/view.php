@@ -25,7 +25,7 @@ $this->menu=array(
     'tabs'=>array(
         array('label'=>'General Informations', 'content'=>$this->renderPartial( '_generalInformations', array( 'model'=>$model ), true ), 'active'=>'true'),
         array('label'=>'Stats', 'content'=>$this->renderPartial( '_stats', array( 'stats'=>$stats, 'statsPerMonth'=>$statsPerMonth ), true )),
-        array('label'=>'Tasks', 'content'=>$this->renderPartial( '_tasks', array( 'tasks'=>$tasks), true )),
+        array('label'=>'Tasks', 'content'=>$this->renderPartial( '/tasks/_tasks', array( 'tasks'=>$tasks), true )),
     ),
 )); ?>
 

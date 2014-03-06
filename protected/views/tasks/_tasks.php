@@ -1,4 +1,3 @@
-
 <?php $this->widget('bootstrap.widgets.TbGridView', array(
     'id'=>'tasks-grid',
     'type'=>'striped bordered condensed',

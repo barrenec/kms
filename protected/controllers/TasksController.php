@@ -131,7 +131,13 @@ class TasksController extends Controller
             'criteria'=>array(
                 	'with'=>array('user'=>array('select'=>'*', 'joinType'=>'LEFT JOIN')),
 					'with'=>array('workingGroup'=>array('select'=>'workingGroupName', 'joinType'=>'LEFT JOIN')),
-            				)
+					'order'=>'taskDateFrom DESC',
+					
+            		),
+					'pagination'=>array(
+		        			'pageSize'=>10
+					),
+								
        		 		)
 			);
 
