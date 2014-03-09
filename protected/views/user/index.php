@@ -3,13 +3,22 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Users',
+	'People',
 );
 
+$this->pageDescription = 'List';
+
+
 $this->menu=array(
-	array('label'=>'Create Users', 'url'=>array('create')),
-	array('label'=>'Manage Users', 'url'=>array('admin')),
+	array('label'=>'Create user', 'url'=>array('create')),
+	array('label'=>'', 'url'=>'#'),
+	array('label'=>'All', 'url'=>'?filter=0'),
+	array('label'=>'Parents', 'url'=>'?filter=1'),
+	array('label'=>'Children', 'url'=>'?filter=2'),
+	array('label'=>'Children waiting', 'url'=>'?filter=7'),
+	
 );
+
 
 $this->searchFilters=array(
 	array('label'=>'All', 'url'=>array('', 'filter'=>'0')),

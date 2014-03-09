@@ -6,6 +6,9 @@ $this->breadcrumbs=array(
 	'Working Groups',
 );
 
+$this->pageDescription = 'List';
+
+
 $this->menu=array(
 	array('label'=>'Create WorkingGroups', 'url'=>array('create')),
 	array('label'=>'Manage WorkingGroups', 'url'=>array('admin')),

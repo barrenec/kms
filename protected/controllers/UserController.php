@@ -42,7 +42,7 @@ class UserController extends Controller
 		);
 				 	
 		$stats = Tasks::model()->getUserStats($id);		
-		$model = $this->loadModel($id);
+		$model = $this->loadModel($id);		
 		$this->pageDescription = ' Profile '.$model->firstName.' '.$model->lastName;
 
 		$this->render('view',array(
@@ -203,7 +203,7 @@ class UserController extends Controller
 				),
 			)
 		);
-		
+				
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));

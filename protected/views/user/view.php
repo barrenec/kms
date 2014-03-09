@@ -5,7 +5,7 @@
 $userName = $model->firstName.' '.$model->lastName;
 
 $this->breadcrumbs=array(
-	'Users'=>array('index'),
+	'People'=>array('index'),
 	$userName,
 );
 

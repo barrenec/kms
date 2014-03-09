@@ -16,7 +16,7 @@
             'name' => 'taksName',
             'type' => 'html',
             'value' => '$data->taskHeadline',
-            'value' => 'CHtml::link($data->taskHeadline, array("view", "id"=>$data->taksId))',
+            'value' => 'CHtml::link($data->taskHeadline, array("/tasks/view", "id"=>$data->taksId))',
         ),
 
         

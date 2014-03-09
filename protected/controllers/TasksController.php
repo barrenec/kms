@@ -91,7 +91,12 @@ class TasksController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
+		$users = new Users;
+		$workingGroups = new WorkingGroups;
+		
+		$usersList = $users->findAll($condition='associationmember <> 0');
+		$workingGroupsList = $workingGroups->findAll();
+		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -104,6 +109,8 @@ class TasksController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+			'users'=>$usersList, 
+			'workingGroups'=>$workingGroupsList
 		));
 	}
 

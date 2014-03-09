@@ -2,6 +2,8 @@
 /* @var $this TasksController */
 /* @var $dataProvider CActiveDataProvider */
 
+$this->pageDescription = 'List';
+
 $this->breadcrumbs=array(
 	'Tasks',
 );
