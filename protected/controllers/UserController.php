@@ -40,78 +40,15 @@ class UserController extends Controller
 				),
 			)
 		);
-
-		$totalWorkingTime = 0;
-		
-		$criteria = new CDbCriteria;
-		$criteria->select='taskDuration,taskDurationEntity,taskDateFrom';
-		$criteria->condition='userId=:userId';
-		$criteria->params=array(':userId'=>$id);
-		$criteria->order='taskDateFrom DESC';
-		$tasksForStats = Tasks::model()->findAll($criteria);
-				
-		$statsPerMonth = array();
-		$loopCount = count($tasksForStats);
-		
-		if($loopCount > 1){
-			$loopCount = (count($tasksForStats)-1);
-		}
-				
-		for ($i = 0; $i < ($loopCount); ++$i) {
-			
-			$date1 = new DateTime($tasksForStats[$i]->taskDateFrom);
-			
-			if(count($tasksForStats) > 1){
-				$date2 = new DateTime($tasksForStats[$i+1]->taskDateFrom);				
-			}
-								
-			if(!array_key_exists($date1->format('M-Y'), $statsPerMonth)){
-				$statsPerMonth[$date1->format('M-Y')] = 				$helper->converToMinutes(intval($tasksForStats[$i]->taskDuration)
-					,$tasksForStats[$i]->taskDurationEntity);
-			}	
-					
-			if( isSet($date2) && $date1->format('M-Y')==$date2->format('M-Y')){
-				$statsPerMonth[$date1->format('M-Y')] = $statsPerMonth[$date1->format('M-Y')] +
-					$helper->converToMinutes(intval($tasksForStats[$i+1]->taskDuration)
-				,$tasksForStats[$i+1]->taskDurationEntity);
-			}
-			elseif(isSet($date2) && $date1->format('M-Y')!=$date2->format('M-Y')){
-				$statsPerMonth[$date2->format('M-Y')] = 				$helper->converToMinutes(intval($tasksForStats[$i+1]->taskDuration)
-					,$tasksForStats[$i+1]->taskDurationEntity);
-			}
-						 
-		 }
-		 
-		 //format the stats
-		 
-		 foreach ($statsPerMonth as $k => $stat){
-			 $statsPerMonth[$k] = $helper->formatWorkingTime($stat);
-		 }
-		 				
-		foreach(Tasks::model()->findAll('userId=:userId', array(':userId'=>$id)) as $record) {
-							
-			if($record->taskDurationEntity == 'h'){
-				$record->taskDuration = $record->taskDuration * 60;	
-
-			}
-			elseif($record->taskDurationEntity == 'd'){
-				$record->taskDuration = $record->taskDuration * 24 * 60;	
-			}
-			
-			$totalWorkingTime = $totalWorkingTime + $record->taskDuration;
-		}
-		
-				
-		$stats = $helper->formatWorkingTime($totalWorkingTime);		
+				 	
+		$stats = Tasks::model()->getUserStats($id);		
 		$model = $this->loadModel($id);
 		$this->pageDescription = ' Profile '.$model->firstName.' '.$model->lastName;
-
 
 		$this->render('view',array(
 			'model'=>$model,
 			'tasks'=>$tasks,
-			'stats'=>$stats,
-			'statsPerMonth'=>$statsPerMonth,
+			'stats'=>$stats
 		));
 	}
 

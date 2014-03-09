@@ -23,8 +23,8 @@ $this->menu=array(
     'type'=>'tabs', 
     'id'=>'Mytab',
     'tabs'=>array(
-        array('label'=>'General Informations', 'content'=>$this->renderPartial( '_generalInformations', array( 'model'=>$model ), true ), 'active'=>'true'),
-        array('label'=>'Stats', 'content'=>$this->renderPartial( '_stats', array( 'stats'=>$stats, 'statsPerMonth'=>$statsPerMonth ), true )),
+        array('label'=>'General Informations', 'content'=>$this->renderPartial( '/user/_generalInformations', array( 'model'=>$model ), true ), 'active'=>'true'),
+        array('label'=>'Stats', 'content'=>$this->renderPartial( '/tasks/_stats', array( 'stats'=>$stats), true )),
         array('label'=>'Tasks', 'content'=>$this->renderPartial( '/tasks/_tasks', array( 'tasks'=>$tasks), true )),
     ),
 )); ?>

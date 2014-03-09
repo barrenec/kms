@@ -25,6 +25,8 @@ $this->menu=array(
     'id'=>'Mytab',
     'tabs'=>array(
         array('label'=>'Tasks', 'content'=>$this->renderPartial( '/tasks/_tasks', array( 'tasks'=>$tasks), true ),'active'=>'true'),
+        array('label'=>'Stats', 'content'=>$this->renderPartial( '/tasks/_stats', array( 'stats'=>$stats), true )),
+		
     ),
 )); ?>
 

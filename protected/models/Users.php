@@ -154,7 +154,7 @@ class Users extends CActiveRecord
 	// helper function for CHtml::listData object	
 	public function getUserFullName()
 	{
-		return $this->lastName.', '.$this->firstName;	
+		return $this->firstName.' '. $this->lastName;	
 	}
 		
 	// ********** validation helpers functions ********** //

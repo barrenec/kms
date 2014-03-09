@@ -56,25 +56,23 @@ class WorkingGroupController extends Controller
 	 */
 	public function actionView($id)
 	{
-
 		$tasks = new CActiveDataProvider
 		(
-			'Tasks', array(
-					
+			'Tasks', array(	
 				'criteria'=>array(
 				 		'condition'=>'workingGroupId=:workingGroupId',
 				 		'params'=>array('workingGroupId'=>$id),	
 				),
-						
 				'pagination'=>array(
 	        			'pageSize'=>10
 				),
 			)
 		);
-
+		
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			'tasks'=>$tasks,
+			'stats'=>Tasks::model()->getWorkingGroupStats($id),
 		));
 	}
 

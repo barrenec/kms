@@ -39,16 +39,12 @@ class Helpers{
 	    $minuteSeconds = $hourSeconds % $secondsInAnHour;
 	    $minutes = floor($minuteSeconds / $secondsInAMinute);
 
-	    // extract the remaining seconds
-	    $remainingSeconds = $minuteSeconds % $secondsInAMinute;
-	    $seconds = ceil($remainingSeconds);
-
-	    // return the final array
+		return $days.' Days '.$hours.' Hours '.$minutes.' Minutes';
+		
 	    $obj = array(
 	        'd' => (int) $days,
 	        'h' => (int) $hours,
 	        'm' => (int) $minutes,
-	        's' => (int) $seconds,
 	    );
 	    return $obj;		
 	}

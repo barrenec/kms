@@ -17,7 +17,9 @@
  * The followings are the available model relations:
  * @property Users $user
  * @property WorkingGroups $workingGroup
- */
+ */ 
+
+
 class Tasks extends CActiveRecord
 {
 	/**
@@ -115,8 +117,87 @@ class Tasks extends CActiveRecord
 	}
 
 
+	/////////////////////////////////////////////////////////////////////
 	
-
-
-
+	
+	public function getWorkingGroupStats($workingGroupId){
+		$tasks = $this->getWorkingGroupTasks($workingGroupId);		
+		return $this->bunchStats($tasks);
+	}
+	
+	private function getWorkingGroupTasks($workingGroupId){
+		
+		$criteria = new CDbCriteria;
+		$criteria->select='taskDuration,taskDurationEntity,taskDateFrom';
+		$criteria->condition='workingGroupId=:workingGroupId';
+		$criteria->params=array(':workingGroupId'=>$workingGroupId);
+		$criteria->order='taskDateFrom DESC';
+		return Tasks::model()->findAll($criteria);			
+	}
+	
+	public function getUserStats($userId){
+		$tasks = $this->getUserTasks($userId);
+		return $this->bunchStats($tasks);
+	}
+	
+	private function getUserTasks($userId){
+				
+		$criteria = new CDbCriteria;
+		$criteria->select='taskDuration,taskDurationEntity,taskDateFrom';
+		$criteria->condition='userId=:userId';
+		$criteria->params=array(':userId'=>$userId);
+		$criteria->order='taskDateFrom DESC';
+		return Tasks::model()->findAll($criteria);
+	}
+	
+	private function bunchStats($tasksForStats){
+		
+		// helperObject to format stats data
+		$helper = new Helpers();
+		
+		$totalWorkingTime = 0;
+		$statsPerMonth = array();
+		$loopCount = count($tasksForStats);
+				
+		if($loopCount > 1){
+			$loopCount = (count($tasksForStats)-1);
+		}
+		
+		for ($i = 0; $i < ($loopCount); ++$i) {
+			
+			$date1 = new DateTime($tasksForStats[$i]->taskDateFrom);
+			
+			if(count($tasksForStats) > 1){
+				$date2 = new DateTime($tasksForStats[$i+1]->taskDateFrom);				
+			}
+								
+			if(!array_key_exists($date1->format('M-Y'), $statsPerMonth)){
+				$statsPerMonth[$date1->format('M-Y')] = 				$helper->converToMinutes(intval($tasksForStats[$i]->taskDuration)
+					,$tasksForStats[$i]->taskDurationEntity);
+			}	
+					
+			if( isSet($date2) && $date1->format('M-Y')==$date2->format('M-Y')){
+				$statsPerMonth[$date1->format('M-Y')] = $statsPerMonth[$date1->format('M-Y')] +
+					$helper->converToMinutes(intval($tasksForStats[$i+1]->taskDuration)
+				,$tasksForStats[$i+1]->taskDurationEntity);
+			}
+			elseif(isSet($date2) && $date1->format('M-Y')!=$date2->format('M-Y')){
+				$statsPerMonth[$date2->format('M-Y')] = 				$helper->converToMinutes(intval($tasksForStats[$i+1]->taskDuration)
+					,$tasksForStats[$i+1]->taskDurationEntity);
+			}				 
+		 }
+		 
+ 		 foreach($tasksForStats as $record) { 
+ 			$record->taskDuration = $helper->converToMinutes($record->taskDuration, $record->taskDurationEntity);
+ 			$totalWorkingTime = $totalWorkingTime + $record->taskDuration;
+ 		}
+		
+		$totalStats = array_merge(array('totalWorkingTime'=>$totalWorkingTime), $statsPerMonth);
+		
+		return $totalStats;	 
+		
+	}	
+	/////////////////////////////////////////////////////////////////////	
+	
+	
 }
