@@ -8,8 +8,15 @@ $this->breadcrumbs=array(
 	'Tasks',
 );
 
+$this->widget('bootstrap.widgets.TbMenu', array(
+    'type'=>'pills',
+    'items'=>array(
+        array('label'=>'Create new Task', 'icon'=>'plus white'
+			, 'url'=>array('create'), 'active'=>true),
+    ),
+)); 
+
 $this->menu=array(
-	array('label'=>'Create Tasks', 'url'=>array('create')),
 	array('label'=>'Manage Tasks', 'url'=>array('admin')),
 );
 ?>

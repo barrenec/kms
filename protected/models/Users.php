@@ -29,17 +29,16 @@ class Users extends CActiveRecord
 			array('telefon, handy', 'length', 'max'=>30),
 			array('nationality', 'length', 'max'=>100),
 			array('birthOfDate', 'date', 'format'=>'yyyy-MM-dd'),
-			array('birthOfDate', 'validateBirthDay', 'format'=>'yyyy-MM-dd'),
+			array('birthOfDate', 'validateBirthDay'),
 			array('inAssociationSince', 'validateDate', 'format'=>'yyyy-MM-dd'),
 			array('inAssociationUntil', 'validateDate', 'format'=>'yyyy-MM-dd'),
 			array('desiredEntryDate', 'validateDate', 'format'=>'yyyy-MM-dd'),
 			array('email', 'email'),
 			array('email', 'unique'),
 			// encrypt userpassword 
-			//array('userPassword', 'maskPassword', 'on'=>'insert,update'),
+			array('userPassword', 'maskPassword', 'on'=>'insert,update'),
 			
 			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
 			array('userId, gender, firstName, lastName, email, userPassword, memberTyp, associationMember, insertDate, adress, zip, telefon, handy, nationality, birthOfDate', 'safe', 'on'=>'search'),
 			
 		);
@@ -139,7 +138,7 @@ class Users extends CActiveRecord
 		// for children is birthday a required field
 		if($this->memberTyp == 'Child')
 		{
-			// create rule
+			// create rule			
 			$newRule = CValidator::createValidator('required', $this, $attribute, $params);
 			$newRule->validate($this);
 		}

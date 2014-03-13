@@ -9,9 +9,15 @@ $this->breadcrumbs=array(
 $this->pageDescription = 'List';
 
 
+$this->widget('bootstrap.widgets.TbMenu', array(
+    'type'=>'pills',
+    'items'=>array(
+        array('label'=>'Create new user', 'icon'=>'plus white'
+			, 'url'=>array('create'), 'active'=>true),
+    ),
+)); 
+
 $this->menu=array(
-	array('label'=>'Create user', 'url'=>array('create')),
-	array('label'=>'', 'url'=>'#'),
 	array('label'=>'All', 'url'=>'?filter=0'),
 	array('label'=>'Parents', 'url'=>'?filter=1'),
 	array('label'=>'Children', 'url'=>'?filter=2'),
