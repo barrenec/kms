@@ -97,6 +97,8 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 <legend>Membership data</legend>
 
 <?php echo $form->labelEx($model,'inAssociationSince'); ?>
+
+
 <?php 
 		$this->widget('zii.widgets.jui.CJuiDatePicker',array(
 			'attribute'=>'inAssociationSince',

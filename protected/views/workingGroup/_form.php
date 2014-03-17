@@ -6,31 +6,26 @@
 
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'working-groups-form',
-	'enableAjaxValidation'=>false,
+<?php /** @var BootActiveForm $form */
+$form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+    'id'=>'verticalForm',
+    'htmlOptions'=>array('class'=>'well'),
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+<p class="note">Fields with <span class="required">*</span> are required.</p>
 
-	<?php echo $form->errorSummary($model); ?>
-	
-	<div class="row">
-		<?php echo $form->labelEx($model,'workingGroupName'); ?>
-		<?php echo $form->textField($model,'workingGroupName',array('size'=>60,'maxlength'=>250)); ?>
-		<?php echo $form->error($model,'workingGroupName'); ?>
-	</div>
+<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'workingGroupDescription'); ?>
-		<?php echo $form->textField($model,'workingGroupDescription',array('size'=>60,'maxlength'=>500)); ?>
-		<?php echo $form->error($model,'workingGroupDescription'); ?>
-	</div>
+<?php echo $form->textFieldRow($model, 'workingGroupName', array('class'=>'span6')); ?>
+<?php echo $form->textAreaRow($model, 'workingGroupDescription', array('class'=>'span6')); ?>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
+<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'label'=>'Create working group')); ?>
 
+ 
 <?php $this->endWidget(); ?>
 
-</div><!-- form -->
+</div>
+
+
+
+	
