@@ -51,12 +51,16 @@ $this->breadcrumbs=array(
 			</p>
 		</div>
 	</div>
+		
 	<?php endif; ?>
 
-
-
 	<div class="form-actions">
-		<?php echo BHtml::submitButton('Login'); ?>
+		<?php echo BHtml::submitButton('Login'); ?>	
+	</div>
+	
+	<hr>
+	<div class="controls">
+		<?php echo CHtml::link(Yii::t('Bootstrap', 'Forgot Login'), Yii::app()->createUrl('site/forgot'), array('class' => 'login-form-links')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

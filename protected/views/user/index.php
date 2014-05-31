@@ -35,6 +35,7 @@ $this->searchFilters=array(
 	array('label'=>'Members', 'url'=>array('', 'filter'=>'8')),	
 );
 
+
 echo $this->renderPartial( '_users', array('dataProvider'=>$dataProvider), true );
 
 

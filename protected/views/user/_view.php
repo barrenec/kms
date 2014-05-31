@@ -24,6 +24,7 @@
 	<?php echo CHtml::encode($data->birthOfDate); ?>
 	<br />
 	
+	
 	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('insertDate')); ?>:</b>
 	<?php echo CHtml::encode($data->insertDate); ?>

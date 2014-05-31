@@ -7,8 +7,9 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         array('name'=>'lastName', 'label'=>'Last name'),
         array('name'=>'email', 'label'=>'Email'),
         array('name'=>'memberTyp', 'label'=>'Member typ'),
-        array('name'=>'associationMember', 'label'=>'Association member'),
-        array('name'=>'adress', 'label'=>'Adress'),
+        array('name'=>'associationMember', 'label'=>'Association member'
+            , 'value'=>Helpers::translateAssociationMember($model->associationMember)),
+        array('name'=>'adress', 'label'=>'Address'),
         array('name'=>'zip', 'label'=>'Postal code'),
         array('name'=>'telefon', 'label'=>'Telephone'),
         array('name'=>'handy', 'label'=>'Mobil phone'),

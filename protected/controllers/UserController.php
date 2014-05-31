@@ -36,7 +36,7 @@ class UserController extends Controller
 				),
 						
 				'pagination'=>array(
-	        			'pageSize'=>5
+	        			'pageSize'=>20
 				),
 			)
 		);
@@ -143,7 +143,7 @@ class UserController extends Controller
 	 */
 	public function actionIndex()
 	{
-		
+
 		$filter = '';
 		
 		if(isset($_GET['filter']))
@@ -199,7 +199,7 @@ class UserController extends Controller
 				),
 						
 				'pagination'=>array(
-	        			'pageSize'=>5
+	        			'pageSize'=>20
 				),
 			)
 		);

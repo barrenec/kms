@@ -19,7 +19,28 @@ class Helpers{
 		
 	}
 	
+	// translates the db ids for membertyps in something more readible
+	static function translateAssociationMember($memberTypId){
+
+		switch($memberTypId){
+				
+			case '1':
+				$meberTypName = 'Member';
+				break;
+			
+			case '2':
+				$meberTypName = 'Founder'; 
+				break;			
+
+			default:	
+				$meberTypName = 'No member'; 
+		}
 		
+		return $meberTypName;	
+
+	}
+
+
 	//get minutes return a string with days, hours and minutes
 	function formatWorkingTime($workedMinutes){
 		
