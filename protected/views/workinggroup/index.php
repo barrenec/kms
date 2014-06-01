@@ -9,15 +9,8 @@ $this->breadcrumbs=array(
 $this->pageDescription = 'List';
 
 
-$this->widget('bootstrap.widgets.TbMenu', array(
-    'type'=>'pills',
-    'items'=>array(
-        array('label'=>'Create new working group', 'icon'=>'plus white'
-			, 'url'=>array('create'), 'active'=>true),
-    ),
-)); 
-
 $this->menu=array(
+	array('label'=>'Create WorkingGroups', 'url'=>array('create')),
 	array('label'=>'Manage WorkingGroups', 'url'=>array('admin')),
 );
 ?>
