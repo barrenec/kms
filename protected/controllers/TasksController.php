@@ -40,7 +40,7 @@ class TasksController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('@'),
+				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -142,7 +142,7 @@ class TasksController extends Controller
 					
             		),
 					'pagination'=>array(
-		        			'pageSize'=>10
+		        			'pageSize'=>50
 					),
 								
        		 		)

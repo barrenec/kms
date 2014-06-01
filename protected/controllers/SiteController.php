@@ -109,4 +109,64 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+	
+	public function actionForgot()
+	{
+		if (isset($_POST['email']))
+		{			
+			$forgotFormModel = new ForgotForm;			
+			$forgotFormModel->email=$_POST['email'];
+									
+			// Verify the email is a real email			
+			if(!$forgotFormModel->validate())
+			{
+				$this->render('forgot');
+				return;
+			}
+			
+			// Check to see if we have a user with that email address
+			$user = Users::model()->findByAttributes(array('email'=>$_POST['email']));
+			
+			
+			if (count($user) == 1)
+			{
+				// Generate hash and populate db
+				$hash = mb_strimwidth(hash("sha256", md5(time() . md5(hash("sha512", time())))), 0, 16);
+				
+				$expires = strtotime("+5 minutes");
+				
+				$user->setUpUserForgotPassword();
+								
+				$meta = UserMetadata::model()->findByAttributes(array('user_id'=>$user->id, 'key'=>'passwordResetExpires'));
+				if ($meta === NULL)
+					$meta = new UserMetadata;
+				
+				$meta->user_id = $user->id;
+				$meta->key = 'passwordResetExpires';
+				$meta->value = $expires;
+				$meta->save();
+				
+
+				$this->sendEmail($user, Yii::t('ciims.email', 'Your Password Reset Information'), '//email/forgot', array('user' => $user, 'hash' => $hash), true, true);
+				
+				// Set success flash
+				Yii::app()->user->setFlash('reset-sent', Yii::t('ciims.controllers.Site', 'An email has been sent to {{email}} with further instructions on how to reset your password', array(
+					'{{email}}' => Cii::get($_POST, 'email', NULL)
+				)));
+			}
+			else
+			{
+				Yii::app()->user->setFlash('reset-sent', Yii::t('ciims.controllers.Site', 'An email has been sent to {{email}} with further instructions on how to reset your password', array(
+					'{{email}}' => Cii::get($_POST, 'email', NULL)
+				)));
+
+				$this->render('forgot', array('id'=>$id));
+				return;
+			}
+			
+		}
+		
+		$this->render('forgot', array('id'=>NULL));
+	}
+	
 }

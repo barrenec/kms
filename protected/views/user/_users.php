@@ -1,5 +1,10 @@
 
-<?php $this->widget('bootstrap.widgets.TbGridView', array(
+
+
+
+<?php 
+
+$this->widget('bootstrap.widgets.TbGridView', array(
 	'id'=>'users-grid',
 	'type'=>'striped bordered condensed',
 	'dataProvider'=>$dataProvider,
@@ -20,6 +25,7 @@
             'value' => '$data->email',
         ),		
 
+
 		array(
             'header' => 'Person Typ',
             'name' => 'memberTyp',
@@ -32,7 +38,7 @@
             'header' => 'Member typ',
             'name' => 'associationMember',
             'type' => 'html',
-            'value' => '$data->associationMember',
+            'value' => 'Helpers::translateAssociationMember($data->associationMember)',
         ),
 
 
@@ -41,4 +47,6 @@
             'htmlOptions'=>array('style'=>'width: 50px'),
         ),
 	),
-)); ?>
+)); 
+
+?>

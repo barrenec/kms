@@ -64,7 +64,7 @@ class Users extends CActiveRecord
 			'memberTyp' => 'Person Typ',
 			'associationMember' => 'Association Member',
 			'insertDate' => 'Insert Date',
-			'adress' => 'Adress',
+			'adress' => 'Address',
 			'zip' => 'Zip',
 			'telefon' => 'Telefon',
 			'handy' => 'Handy',
@@ -107,9 +107,23 @@ class Users extends CActiveRecord
 		));
 	}
 	
-
+	
+	public function setUpUserForgotPassword()
+	{
+		$hash = $this->generateHash();
+		$expires = strtotime("+5 minutes");		
+		$this->passwordResetCode = $hash;
+		$this->save();
+	}
+	
 
 	// ********** validation helpers functions ********** //
+	
+	private function generateHash()
+	{
+		return mb_strimwidth(hash("sha256", md5(time() 
+			. md5(hash("sha512", time())))), 0, 16);
+	}
 	
 	public function maskPassword($attribute,$params)
 	{
