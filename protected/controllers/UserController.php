@@ -20,6 +20,16 @@ class UserController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
+
+
+	public function applyRightManagement($userEmail){
+
+		if(is_null($userEmail) || strcmp(Yii::app()->user->getState('username'), $userEmail) != 0){
+			$this->redirect(array('admin'));
+		}
+	}
+
+
 	public function actionView($id)
 	{
 		
@@ -55,6 +65,7 @@ class UserController extends Controller
 	
 	public function actionCreate()
 	{
+
 	    $model= new Users;
 		$countries = new Country;
 		$countrieList = $countries->findAll($condition='0 = 0 order by de'); 
@@ -87,6 +98,7 @@ class UserController extends Controller
 				
 	        }
 	    }
+
 	    $this->render('create',array('model'=>$model, 'countries'=>$countrieList));
 	}
 
@@ -99,6 +111,9 @@ class UserController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+
+		$this->applyRightManagement($model->email);
+
 		// set passwort to null for form
 		$model->userPassword = null;
 		$countries = new Country;
@@ -131,7 +146,10 @@ class UserController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+
+		$model = $this->loadModel($id);
+		$this->applyRightManagement($model->email);
+		$model->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))

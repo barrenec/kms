@@ -38,6 +38,7 @@ class TasksController extends Controller
 				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
+
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
 				'users'=>array('admin'),
@@ -48,12 +49,22 @@ class TasksController extends Controller
 		);
 	}
 
+
+	public function applyRightManagement($userEmail){
+
+		if(is_null($userEmail) || strcmp(Yii::app()->user->getState('username'), $userEmail) != 0){
+			$this->redirect(array('admin'));
+		}
+	}
+
+
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
 	public function actionView($id)
-	{
+	{	
+
 		$this->pageDescription = 'Details';
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
@@ -92,6 +103,12 @@ class TasksController extends Controller
 	{
 		$model=$this->loadModel($id);
 		$users = new Users;
+
+		$author = $users->findByPk($model->userId)->email;
+		$this->applyRightManagement($author);
+
+		
+
 		$workingGroups = new WorkingGroups;
 		
 		$usersList = $users->findAll($condition='associationmember <> 0');
