@@ -11,7 +11,7 @@ class TasksController extends Controller
 	public $pageDescription = '';
 
 
-	/**
+	/**				
 	 * @return array action filters
 	 */
 	public function filters()
@@ -39,10 +39,16 @@ class TasksController extends Controller
 				'users'=>array('@'),
 			),
 
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+			array('allow',
+				'actions'=>array('delete'),
+				'users'=>array('@'),
+			),
+
+			array('allow', 
+				'actions'=>array('admin'),
 				'users'=>array('admin'),
 			),
+
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -103,11 +109,8 @@ class TasksController extends Controller
 	{
 		$model=$this->loadModel($id);
 		$users = new Users;
-
 		$author = $users->findByPk($model->userId)->email;
 		$this->applyRightManagement($author);
-
-		
 
 		$workingGroups = new WorkingGroups;
 		
@@ -137,8 +140,13 @@ class TasksController extends Controller
 	 * @param integer $id the ID of the model to be deleted
 	 */
 	public function actionDelete($id)
-	{
-		$this->loadModel($id)->delete();
+	{	
+		$model = $this->loadModel($id);	
+		$users = new Users;
+		$author = $users->findByPk($model->userId)->email;
+		$this->applyRightManagement($author);
+
+		$model->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
