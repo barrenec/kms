@@ -95,6 +95,7 @@ class SiteController extends Controller
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login()){
 				Yii::app()->user->setState('username', $model->username);
+				Yii::log($model->username.' '.date(DATE_RFC822).' '.$_SERVER['REMOTE_ADDR'], 'info', 'logons');
 				$this->redirect(Yii::app()->user->returnUrl);
 			}
 		}
