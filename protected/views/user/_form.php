@@ -58,16 +58,32 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 <br><br>
 
+<?php  
 
-<?php  echo $form->dropDownListRow($model, 'nationality' 
-		, CHtml::listData($countries, 'code','de')
-		, array('class'=>'span4', 'options' => array('DE' =>array('selected'=>true)))	
+$countryArray = CHtml::listData($countries, 'code','en');
+array_unshift($countryArray, "Select nationality please");
+
+echo $form->dropDownListRow(
+		$model
+		, 'nationality' 
+		, $countryArray
+		, array(
+			'class'=>'span4'
+		)	
 );?>
 
-<?php  echo $form->dropDownListRow($model, 'nationality2' 
-		, CHtml::listData($countries, 'code','de')
-		, array('class'=>'span4', 'options' => array('DE' =>array('selected'=>true)))	
-);?>
+<?php  
+
+echo $form->dropDownListRow(
+		$model
+		, 'nationality2' 
+		,  $countryArray
+		, array(
+			'class'=>'span4'
+		)	
+);
+
+?>
 
 
 <?php echo $form->labelEx($model,'birthOfDate'); ?>
@@ -81,8 +97,10 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 		     'showAnim'=>'fold',
 			 'changeYear'=>true,
 			 'dateFormat'=>'yy-mm-dd',
+			 'yearRange'=>'1940:'.date('Y'),
 		    ),
 		    'htmlOptions'=>array(),
+
 		));
 		?>
 
@@ -106,9 +124,11 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 		    // additional javascript options for the date picker plugin
 			'model'=>$model,
 		    'options'=>array(
-		     'showAnim'=>'fold',
-			 'changeYear'=>true,
-			 'dateFormat'=>'yy-mm-dd',
+		    'showAnim'=>'slideDown',
+			'changeYear'=>true,
+			'dateFormat'=>'yy-mm-dd',
+			'yearRange'=>'2012:'.date('Y'),
+
 		    ),
 		    'htmlOptions'=>array(),
 		));
@@ -122,9 +142,11 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 		    // additional javascript options for the date picker plugin
 			'model'=>$model,
 		    'options'=>array(
-		     'showAnim'=>'fold',
-			 'changeYear'=>true,
-			 'dateFormat'=>'yy-mm-dd',
+		    'showAnim'=>'slideDown',
+			'changeYear'=>true,
+			'dateFormat'=>'yy-mm-dd',
+			'yearRange'=>'2012:'.date('Y'),
+
 		    ),
 		    'htmlOptions'=>array(),
 		));
@@ -139,9 +161,11 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 		    // additional javascript options for the date picker plugin
 			'model'=>$model,
 		    'options'=>array(
-		     'showAnim'=>'fold',
-			 'changeYear'=>true,
-			 'dateFormat'=>'yy-mm-dd',
+		    'showAnim'=>'slideDown',
+			'changeYear'=>true,
+			'dateFormat'=>'yy-mm-dd',
+			'yearRange'=>'2011:'.(date('Y')+3),
+
 		    ),
 		    'htmlOptions'=>array(),
 		));

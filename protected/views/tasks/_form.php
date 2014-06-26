@@ -12,8 +12,14 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     'htmlOptions'=>array('class'=>'well'),
 )); ?>
 
-<?php  echo $form->dropDownListRow($model, 'userId' 
-		, CHtml::listData($users, 'userId','UserFullName'));?>
+<?php 
+
+ echo $form->dropDownListRow(
+		$model
+		, 'userId' 
+		, CHtml::listData($users, 'userId','UserFullName')
+		,array('options' => array(Yii::app()->user->getState('userId')=>array('selected'=>true)))		
+		);?>
 
 <?php  echo $form->dropDownListRow($model, 'workingGroupId' 
 		, CHtml::listData($workingGroups, 'id','workingGroupName'));?>

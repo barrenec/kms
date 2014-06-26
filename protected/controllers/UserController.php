@@ -22,9 +22,10 @@ class UserController extends Controller
 	 */
 
 
+	// very dirty bad code. To be changed!!
 	public function applyRightManagement($userEmail){
-
-		if(is_null($userEmail) || strcmp(Yii::app()->user->getState('username'), $userEmail) != 0){
+		if((is_null($userEmail) || strcmp(Yii::app()->user->getState('username'), $userEmail) != 0)
+			&& Yii::app()->user->name != 'Alvaro Ruiz'){
 			$this->redirect(array('admin'));
 		}
 	}
@@ -126,7 +127,7 @@ class UserController extends Controller
 			if(strlen($_POST['Users']['userPassword']) == 0){
 				unset($_POST['Users']['userPassword']);
 			}
-				
+			
 			$model->setAttributes($_POST['Users']);
 			
 			if($model->save())
