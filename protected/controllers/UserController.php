@@ -122,16 +122,18 @@ class UserController extends Controller
 		
 		if(isset($_POST['Users']))
 		{	
-			
 			//do not update password if feld has no len
 			if(strlen($_POST['Users']['userPassword']) == 0){
-				unset($_POST['Users']['userPassword']);
+				unset($_POST['Users']['userPassword']);	
 			}
-			
-			$model->setAttributes($_POST['Users']);
-			
-			if($model->save())
+
+			$model->attributes = $_POST['Users'];
+	
+			if($model->validate()){
+				$model->update(array_keys($_POST['Users']));
 				$this->redirect(array('view','id'=>$model->userId));
+			}
+				
 		}
 
 		$this->render('update',array(

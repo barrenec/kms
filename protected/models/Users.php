@@ -1,7 +1,7 @@
 <?php
 
 
-class Users extends CActiveRecord
+class Users extends IsDirtyActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -29,8 +29,7 @@ class Users extends CActiveRecord
 			array('telefon, handy', 'length', 'max'=>30),
 			array('nationality', 'length', 'max'=>100),
 			array('nationality2', 'length', 'max'=>100),
-			array('birthOfDate', 'date', 'format'=>'yyyy-MM-dd'),
-			array('birthOfDate', 'validateBirthDay'),
+			array('birthOfDate', 'validateBirthDay', 'format'=>'yyyy-MM-dd'),
 			array('inAssociationSince', 'validateDate', 'format'=>'yyyy-MM-dd'),
 			array('inAssociationUntil', 'validateDate', 'format'=>'yyyy-MM-dd'),
 			array('desiredEntryDate', 'validateDate', 'format'=>'yyyy-MM-dd'),
